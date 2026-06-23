@@ -31,6 +31,16 @@ body{
     background-size:120px 120px, 180px 180px;
     opacity:0.7;
 }
+
+#starCanvas{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:-1;
+}
     
 .container{
     max-width:600px;
@@ -150,7 +160,7 @@ body{
 
 <body>
 
-<div class="stars"></div>
+<canvas id="starCanvas"></canvas>
 
 <div class="container">
 
@@ -241,6 +251,81 @@ const dayNumber =
 
 document.getElementById("mission").textContent =
     missions[dayNumber % missions.length];
+
+const canvas =
+    document.getElementById("starCanvas");
+
+const ctx =
+    canvas.getContext("2d");
+
+let stars = [];
+
+function resize(){
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    stars = [];
+
+    for(let i=0;i<60;i++){
+
+        stars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 3 + 1,
+            speed: Math.random() * 0.4 + 0.1,
+            opacity: Math.random() * 0.6 + 0.2
+        });
+
+    }
+}
+
+function draw(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    stars.forEach(star=>{
+
+        star.y += star.speed;
+        
+        if(star.y > canvas.height){
+            star.y = -10;
+            star.x =
+                Math.random() * canvas.width;
+        }
+
+        ctx.beginPath();
+
+        ctx.arc(
+            star.x,
+            star.y,
+            star.size,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle =
+            `rgba(255,220,150,${star.opacity})`;
+
+        ctx.fill();
+
+    });
+
+    requestAnimationFrame(draw);
+}
+
+resize();
+draw();
+
+window.addEventListener(
+    "resize",
+    resize
+);
 
 </script>
 
