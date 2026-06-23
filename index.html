@@ -60,6 +60,15 @@ body{
     font-weight:600;
 }
 
+.mission-comment{
+    margin-top:25px;
+    padding-top:20px;
+    border-top:1px solid #eee;
+    color:#777;
+    line-height:1.8;
+    font-size:0.95rem;
+}
+
 .note{
     margin-top:25px;
     color:#777;
@@ -74,11 +83,12 @@ body{
 
 .buttons button{
     flex:1;
+    aspect-ratio:1/1;
     border:none;
-    border-radius:12px;
-    padding:14px;
+    border-radius:18px;
     font-size:1rem;
     cursor:pointer;
+    font-weight:600;
 }
 
 .done{
@@ -99,17 +109,22 @@ body{
 
 .stats{
     display:flex;
-    justify-content:space-between;
-    margin-top:15px;
-    color:#666;
+    gap:10px;
+    margin-top:10px;
+}
+
+.count{
+    flex:1;
+    text-align:center;
+    color:#777;
     font-size:0.9rem;
 }
 
-.footer{
+.footer-message{
     text-align:center;
-    margin-top:60px;
-    color:#999;
-    font-size:0.9rem;
+    margin-top:30px;
+    color:#888;
+    line-height:1.8;
 }
 
 </style>
@@ -143,46 +158,47 @@ body{
             帰り道で花をひとつ探してみよう
         </div>
 
-        <div class="note">
-            終わったら、それで十分。
+        <div class="mission-comment">
+            道端でも、公園でも。
+            見つけたら少しだけ足を止めてみよう。
         </div>
 
         <div class="buttons">
 
             <button class="done">
-                やった
+                やった！
             </button>
-
+            
             <button class="later">
-                これからやる
+                これから<br>やる
             </button>
 
             <button class="rest">
-                おやすみ
+                今日は<br>おやすみ
             </button>
 
         </div>
 
         <div class="stats">
-
-            <div>
-                🌱 0人
+            
+            <div class="count">
+                324人
             </div>
 
-            <div>
-                🚶 0人
+            <div class="count">
+                87人
             </div>
-
-            <div>
-                ☕ 0人
+            
+            <div class="count">
+                156人
             </div>
-
+        
         </div>
 
     </div>
 
-    <div class="footer">
-        今日も無理のない範囲で。
+    <div class="footer-message">
+    終わったら、それで十分。
     </div>
 
 </div>
