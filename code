@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>今日の寄り道</title>
+
+<style>
+body {
+    font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+    background: #f7f4ee;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    max-width: 500px;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.mission {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    text-align: center;
+    margin: 30px 0;
+}
+
+.note {
+    text-align: center;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+button {
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.done {
+    background: #cfe8d5;
+}
+
+.later {
+    background: #d8e6f8;
+}
+
+.rest {
+    background: #eee;
+}
+
+.stats {
+    margin-top: 30px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.stats p {
+    margin: 8px 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>今日の寄り道</h1>
+
+        <p class="subtitle">
+            今日は少しだけ違う景色を見てみよう
+        </p>
+
+        <div class="mission" id="mission">
+            帰り道で花をひとつ探してみよう
+        </div>
+
+        <div class="note">
+            終わったら、それで十分。
+        </div>
+
+        <div class="buttons">
+            <button class="done" onclick="vote('done')">
+                やった
+            </button>
+
+            <button class="later" onclick="vote('later')">
+                これからやる
+            </button>
+
+            <button class="rest" onclick="vote('rest')">
+                今日はおやすみ
+            </button>
+        </div>
+
+        <div class="stats">
+            <p>🌱 やった：<span id="doneCount">127</span>人</p>
+            <p>🚶 これからやる：<span id="laterCount">54</span>人</p>
+            <p>☕ おやすみ：<span id="restCount">39</span>人</p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const missions = [
+    "帰り道で花をひとつ探してみよう",
+    "空を見上げて今日いちばん印象に残った雲を覚えて帰ろう",
+    "いつもと違う飲み物を選んでみよう",
+    "気になるお店の名前を覚えて帰ろう",
+    "面白い看板をひとつ見つけよう",
+    "一度も使ったことのない出口から駅を出てみよう",
+    "今日見かけた鳥の名前を調べてみよう",
+    "一番好きな香りを探してみよう"
+];
+
+const today = new Date();
+const dayNumber =
+    Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
+
+const mission =
+    missions[dayNumber % missions.length];
+
+document.getElementById("mission").textContent = mission;
+
+function vote(type){
+
+    if(type === "done"){
+        document.getElementById("doneCount").textContent++;
+    }
+
+    if(type === "later"){
+        document.getElementById("laterCount").textContent++;
+    }
+
+    if(type === "rest"){
+        document.getElementById("restCount").textContent++;
+    }
+
+}
+</script>
+
+</body>
+</html>
