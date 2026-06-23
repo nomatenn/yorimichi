@@ -3,95 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>今日の寄り道</title>
 
 <style>
-body {
-    font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
-    background: #f7f4ee;
-    color: #333;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
+
+body{
+    font-family:"Hiragino Sans","Yu Gothic",sans-serif;
+    background:#f7f4ee;
+    color:#333;
+    margin:0;
+    padding:20px;
 }
 
-.container {
-    max-width: 500px;
-    width: 100%;
-    margin-top: 40px;
+.container{
+    max-width:600px;
+    margin:0 auto;
 }
 
-.card {
-    background: white;
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+.catchcopy{
+    text-align:center;
+    margin-top:40px;
+    margin-bottom:50px;
+    line-height:1.9;
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 10px;
+.catchcopy h1{
+    font-size:1.8rem;
+    font-weight:600;
+    margin-bottom:20px;
 }
 
-.subtitle {
-    text-align: center;
-    color: #666;
-    margin-bottom: 30px;
+.catchcopy p{
+    font-size:1.1rem;
+    color:#666;
 }
 
-.mission {
-    font-size: 1.3rem;
-    line-height: 1.8;
-    text-align: center;
-    margin: 30px 0;
+.mission-card{
+    background:white;
+    border:3px solid #e6d8b9;
+    border-radius:20px;
+    padding:35px 25px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,0.06);
 }
 
-.note {
-    text-align: center;
-    color: #777;
-    margin-bottom: 30px;
+.date-title{
+    color:#888;
+    font-size:0.95rem;
+    margin-bottom:25px;
 }
 
-.buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+.mission{
+    font-size:1.5rem;
+    line-height:1.8;
+    font-weight:600;
 }
 
-button {
-    border: none;
-    border-radius: 12px;
-    padding: 14px;
-    font-size: 1rem;
-    cursor: pointer;
+.note{
+    margin-top:25px;
+    color:#777;
+    font-size:0.95rem;
 }
 
-button:hover {
-    opacity: 0.9;
+.buttons{
+    display:flex;
+    gap:10px;
+    margin-top:35px;
 }
 
-.done {
-    background: #cfe8d5;
+.buttons button{
+    flex:1;
+    border:none;
+    border-radius:12px;
+    padding:14px;
+    font-size:1rem;
+    cursor:pointer;
 }
 
-.later {
-    background: #d8e6f8;
+.done{
+    background:#d7ead5;
 }
 
-.rest {
-    background: #eee;
+.later{
+    background:#dce8f7;
 }
 
-.stats {
-    margin-top: 30px;
-    border-top: 1px solid #ddd;
-    padding-top: 20px;
+.rest{
+    background:#ececec;
 }
 
-.stats p {
-    margin: 8px 0;
+.buttons button:hover{
+    opacity:0.9;
 }
+
+.stats{
+    display:flex;
+    justify-content:space-between;
+    margin-top:15px;
+    color:#666;
+    font-size:0.9rem;
+}
+
+.footer{
+    text-align:center;
+    margin-top:60px;
+    color:#999;
+    font-size:0.9rem;
+}
+
 </style>
 </head>
 
@@ -99,13 +119,25 @@ button:hover {
 
 <div class="container">
 
-    <div class="card">
+    <div class="catchcopy">
 
-        <h1>今日の寄り道</h1>
+        <h1>
+            同じ生活のくり返しで、<br>
+            毎日がつまらない人へ
+        </h1>
 
-        <p class="subtitle">
-            今日は少しだけ違う景色を見てみよう
+        <p>
+            ほんのすこしだけ、<br>
+            違う景色を見てみませんか？
         </p>
+
+    </div>
+
+    <div class="mission-card">
+
+        <div class="date-title" id="dateTitle">
+            6月23日のお題
+        </div>
 
         <div class="mission" id="mission">
             帰り道で花をひとつ探してみよう
@@ -116,25 +148,41 @@ button:hover {
         </div>
 
         <div class="buttons">
-            <button class="done" onclick="vote('done')">
+
+            <button class="done">
                 やった
             </button>
 
-            <button class="later" onclick="vote('later')">
+            <button class="later">
                 これからやる
             </button>
 
-            <button class="rest" onclick="vote('rest')">
-                今日はおやすみ
+            <button class="rest">
+                おやすみ
             </button>
+
         </div>
 
         <div class="stats">
-            <p>🌱 やった：<span id="doneCount">127</span>人</p>
-            <p>🚶 これからやる：<span id="laterCount">54</span>人</p>
-            <p>☕ おやすみ：<span id="restCount">39</span>人</p>
+
+            <div>
+                🌱 0人
+            </div>
+
+            <div>
+                🚶 0人
+            </div>
+
+            <div>
+                ☕ 0人
+            </div>
+
         </div>
 
+    </div>
+
+    <div class="footer">
+        今日も無理のない範囲で。
     </div>
 
 </div>
@@ -143,39 +191,27 @@ button:hover {
 
 const missions = [
     "帰り道で花をひとつ探してみよう",
-    "空を見上げて今日いちばん印象に残った雲を覚えて帰ろう",
+    "空を見上げて、一番印象に残った雲を覚えて帰ろう",
     "いつもと違う飲み物を選んでみよう",
     "気になるお店の名前を覚えて帰ろう",
     "面白い看板をひとつ見つけよう",
-    "一度も使ったことのない出口から駅を出てみよう",
-    "今日見かけた鳥の名前を調べてみよう",
-    "一番好きな香りを探してみよう"
+    "一度も使ったことのない出口から駅を出てみよう"
 ];
 
 const today = new Date();
+
+const month = today.getMonth() + 1;
+const date = today.getDate();
+
+document.getElementById("dateTitle").textContent =
+    `${month}月${date}日のお題`;
+
 const dayNumber =
     Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
 
-const mission =
+document.getElementById("mission").textContent =
     missions[dayNumber % missions.length];
 
-document.getElementById("mission").textContent = mission;
-
-function vote(type){
-
-    if(type === "done"){
-        document.getElementById("doneCount").textContent++;
-    }
-
-    if(type === "later"){
-        document.getElementById("laterCount").textContent++;
-    }
-
-    if(type === "rest"){
-        document.getElementById("restCount").textContent++;
-    }
-
-}
 </script>
 
 </body>
