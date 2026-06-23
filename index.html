@@ -3,19 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho&display=swap" rel="stylesheet">
 
 <title>今日の寄り道</title>
 
 <style>
 
 body{
-    font-family:"Hiragino Sans","Yu Gothic",sans-serif;
-    background:#f7f4ee;
+    font-family:"Zen Old Mincho", serif;
+    background:
+        radial-gradient(circle at 15% 15%, #fdf6d8 0%, transparent 20%),
+        radial-gradient(circle at 85% 20%, #dfe9f5 0%, transparent 20%),
+        radial-gradient(circle at 20% 80%, #f7e5d5 0%, transparent 20%),
+        #faf7f1;
     color:#333;
     margin:0;
     padding:20px;
 }
 
+.stars{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image:
+        radial-gradient(#fff 1px, transparent 1px),
+        radial-gradient(#fff 1px, transparent 1px);
+    background-size:120px 120px, 180px 180px;
+    opacity:0.35;
+}
+    
 .container{
     max-width:600px;
     margin:0 auto;
@@ -29,29 +45,33 @@ body{
 }
 
 .catchcopy h1{
-    font-size:1.8rem;
-    font-weight:600;
-    margin-bottom:20px;
+    font-size:2rem;
+    font-weight:500;
+    line-height:1.8;
 }
 
 .catchcopy p{
-    font-size:1.1rem;
-    color:#666;
+    color:#7f7f7f;
+    line-height:2;
 }
 
 .mission-card{
-    background:white;
-    border:3px solid #e6d8b9;
-    border-radius:20px;
-    padding:35px 25px;
-    text-align:center;
-    box-shadow:0 4px 15px rgba(0,0,0,0.06);
+    background:rgba(255,255,255,0.8);
+    border:2px solid #e9dcc0;
+    border-radius:30px;
+    padding:50px 35px;
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.05);
+    backdrop-filter: blur(3px);
 }
 
 .date-title{
-    color:#888;
-    font-size:0.95rem;
-    margin-bottom:25px;
+    display:inline-block;
+    background:#f7f0dc;
+    padding:8px 18px;
+    border-radius:999px;
+    font-size:0.9rem;
+    margin-bottom:35px;
 }
 
 .mission{
@@ -83,32 +103,27 @@ body{
 }
 
 .buttons button{
-    width:95px;
-    height:95px;
-
+    width:85px;
+    height:85px;
     border:none;
-    border-radius:18px;
-
-    font-size:0.95rem;
-    font-weight:600;
-
-    cursor:pointer;
+    border-radius:24px;
+    transition:0.2s;
 }
 
 .done{
-    background:#d7ead5;
+    background:#dfeeda;
 }
 
 .later{
-    background:#dce8f7;
+    background:#e2ecf7;
 }
 
 .rest{
-    background:#ececec;
+    background:#f1ece4;
 }
 
 .buttons button:hover{
-    opacity:0.9;
+    transform:translateY(-3px);
 }
 
 .stats{
@@ -136,6 +151,8 @@ body{
 </head>
 
 <body>
+
+<div class="stars"></div>
 
 <div class="container">
 
