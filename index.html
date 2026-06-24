@@ -162,6 +162,11 @@ body{
 .reaction button:hover{
     transform:translateY(-3px);
 }
+
+.reaction button:disabled{
+    opacity:0.5;
+    cursor:default;
+}
     
 .footer-message{
     text-align:center;
@@ -316,48 +321,93 @@ async function loadCounts() {
 
 loadCounts();
 
+const todayStorageKey =
+    `yorimichi-${todayKey}`;
+
+const status =
+    localStorage.getItem(todayStorageKey);
+
+if(status === "try"){
+
+    document
+      .getElementById("doneBtn")
+      .disabled = false;
+
+}
+
+if(status === "done"){
+
+    document
+      .getElementById("tryBtn")
+      .disabled = true;
+
+    document
+      .getElementById("doneBtn")
+      .disabled = true;
+
+}
+
+document
+  .getElementById("tryBtn")
+  .addEventListener("click", async ()=>{
+
+    if(localStorage.getItem(todayStorageKey))
+        return;
+
+    await updateDoc(
+        reactionRef,
+        {
+            tryCount: increment(1)
+        }
+    );
+
+    localStorage.setItem(
+        todayStorageKey,
+        "try"
+    );
+
+    document
+      .getElementById("doneBtn")
+      .disabled = false;
+
+    loadCounts();
+
+});
+
 document
   .getElementById("doneBtn")
-  .addEventListener("click", async () => {
+  .addEventListener("click", async ()=>{
+
+    if(
+      localStorage.getItem(todayStorageKey)
+      !==
+      "try"
+    ) return;
 
     await updateDoc(
-      reactionRef,
-      {
-        done: increment(1)
-      }
+        reactionRef,
+        {
+            doneCount: increment(1)
+        }
     );
 
-    loadCounts();
-});
-
-document
-  .getElementById("laterBtn")
-  .addEventListener("click", async () => {
-
-    await updateDoc(
-      reactionRef,
-      {
-        later: increment(1)
-      }
+    localStorage.setItem(
+        todayStorageKey,
+        "done"
     );
 
-    loadCounts();
-});
+    document
+      .getElementById("tryBtn")
+      .disabled = true;
 
-document
-  .getElementById("restBtn")
-  .addEventListener("click", async () => {
-
-    await updateDoc(
-      reactionRef,
-      {
-        rest: increment(1)
-      }
-    );
+    document
+      .getElementById("doneBtn")
+      .disabled = true;
 
     loadCounts();
+
 });
-    
+
 
 const month = today.getMonth() + 1;
 const date = today.getDate();
