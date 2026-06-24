@@ -295,9 +295,8 @@ async function loadCounts() {
         await setDoc(
             reactionRef,
             {
-                done: 0,
-                later: 0,
-                rest: 0
+                tryCount: 0,
+                doneCount: 0
             }
         );
 
@@ -307,15 +306,13 @@ async function loadCounts() {
 
     const data = snap.data();
 
+    document.getElementById("tryCount")
+    .textContent =
+    `${data.tryCount || 0}人`;
+    
     document.getElementById("doneCount")
-        .textContent = `${data.done}人`;
-
-    document.getElementById("laterCount")
-        .textContent = `${data.later}人`;
-
-    document.getElementById("restCount")
-        .textContent = `${data.rest}人`;
-}
+    .textContent =
+    `${data.doneCount || 0}人`;}
 
 loadCounts();
 
