@@ -114,17 +114,17 @@ body{
 
 .buttons{
     display:flex;
-    justify-content:center;
-    gap:15px;
+    gap:12px;
     margin-top:20px;
 }
 
 .buttons button{
-    width:85px;
-    height:85px;
+    flex:1;
+    height:80px;
     border:1px solid rgba(0,0,0,0.05);
     border-radius:24px;
     transition:0.2s;
+    font-family:"Zen Old Mincho", serif;
 }
 
 .done{
@@ -203,29 +203,22 @@ body{
 
     </div>
 
-    <div class="buttons">
+    <div class="reaction-area">
 
-    <button class="done">
-        やった！
-    </button>
+    <div class="reaction">
+        <button class="done">やった！</button>
+        <div class="count">324人</div>
+    </div>
 
-    <button class="later">
-        これから<br>やる
-    </button>
+    <div class="reaction">
+        <button class="later">これから<br>やる</button>
+        <div class="count">87人</div>
+    </div>
 
-    <button class="rest">
-        今日は<br>おやすみ
-    </button>
-
-</div>
-
-<div class="stats">
-
-    <div class="count">324人</div>
-
-    <div class="count">87人</div>
-
-    <div class="count">156人</div>
+    <div class="reaction">
+        <button class="rest">今日は<br>おやすみ</button>
+        <div class="count">156人</div>
+    </div>
 
 </div>
 
