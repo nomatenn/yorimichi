@@ -197,9 +197,8 @@ body{
             帰り道で花をひとつ探してみよう
         </div>
 
-        <div class="mission-comment">
-            道端でも、公園でも。
-            見つけたら少しだけ足を止めてみよう。
+        <div class="mission-comment" id="missionComment">
+            コメント
         </div>
 
     </div>
@@ -255,11 +254,48 @@ const date = today.getDate();
 document.getElementById("dateTitle").textContent =
     `${month}月${date}日のお題`;
 
-const dayNumber =
-    Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
+fetch("missions.csv")
+    .then(response => response.text())
+    .then(csv => {
 
-document.getElementById("mission").textContent =
-    missions[dayNumber % missions.length];
+        const rows = csv.trim().split("\n");
+
+        const missions = rows
+            .slice(1)
+            .map(row => {
+
+                const cols = row.split(",");
+
+                return {
+                    id: cols[0],
+                    title: cols[1],
+                    comment: cols[2]
+                };
+
+            });
+
+        const dayNumber =
+            Math.floor(
+                today.getTime()
+                /
+                (1000 * 60 * 60 * 24)
+            );
+
+        const mission =
+            missions[
+                dayNumber % missions.length
+            ];
+
+        document.getElementById("mission")
+            .textContent = mission.title;
+
+        document.getElementById("missionComment")
+            .textContent = mission.comment;
+
+    })
+    .catch(error => {
+        console.error(error);
+    });
 
 const canvas =
     document.getElementById("starCanvas");
