@@ -292,6 +292,48 @@ async function loadCounts() {
 }
 
 loadCounts();
+
+document
+  .getElementById("doneBtn")
+  .addEventListener("click", async () => {
+
+    await updateDoc(
+      reactionRef,
+      {
+        done: increment(1)
+      }
+    );
+
+    loadCounts();
+});
+
+document
+  .getElementById("laterBtn")
+  .addEventListener("click", async () => {
+
+    await updateDoc(
+      reactionRef,
+      {
+        later: increment(1)
+      }
+    );
+
+    loadCounts();
+});
+
+document
+  .getElementById("restBtn")
+  .addEventListener("click", async () => {
+
+    await updateDoc(
+      reactionRef,
+      {
+        rest: increment(1)
+      }
+    );
+
+    loadCounts();
+});
     
 
 const today = new Date();
