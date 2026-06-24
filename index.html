@@ -112,25 +112,13 @@ body{
     font-size:0.95rem;
 }
 
-.buttons{
-    display:flex;
-    gap:12px;
-    margin-top:20px;
-}
-
-.buttons button{
-    flex:1;
-    height:80px;
-    border:1px solid rgba(0,0,0,0.05);
-    border-radius:24px;
-    transition:0.2s;
-    font-family:"Zen Old Mincho", serif;
-}
-
 .reaction-area{
     display:flex;
     gap:12px;
     margin-top:20px;
+    width:86%;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 .reaction{
@@ -141,6 +129,10 @@ body{
 .reaction button{
     width:100%;
     height:80px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:"Zen Old Mincho", serif;
 }
 
 .count{
@@ -163,20 +155,6 @@ body{
 
 .buttons button:hover{
     transform:translateY(-3px);
-}
-
-.stats{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    margin-top:8px;
-}
-
-.count{
-    width:95px;
-    text-align:center;
-    color:#777;
-    font-size:0.85rem;
 }
     
 .footer-message{
@@ -251,15 +229,6 @@ body{
 </div>
 
 <script>
-
-const missions = [
-    "帰り道で花をひとつ探してみよう",
-    "空を見上げて、一番印象に残った雲を覚えて帰ろう",
-    "いつもと違う飲み物を選んでみよう",
-    "気になるお店の名前を覚えて帰ろう",
-    "面白い看板をひとつ見つけよう",
-    "一度も使ったことのない出口から駅を出てみよう"
-];
 
 const today = new Date();
 
