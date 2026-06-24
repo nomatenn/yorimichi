@@ -212,18 +212,24 @@ body{
     <div class="reaction-area">
 
     <div class="reaction">
-        <button class="done">やった！</button>
-        <div class="count">324人</div>
+        <button class="done" id="doneBtn">
+            やった！
+        </button>
+        <div class="count" id="doneCount">0人</div>
     </div>
 
     <div class="reaction">
-        <button class="later">これから<br>やる</button>
-        <div class="count">87人</div>
+        <button class="later" id="laterBtn">
+            これから<br>やる
+        </button>
+        <div class="count" id="laterCount">0人</div>
     </div>
 
     <div class="reaction">
-        <button class="rest">今日は<br>おやすみ</button>
-        <div class="count">156人</div>
+        <button class="rest" id="restBtn">
+            今日は<br>おやすみ
+        </button>
+        <div class="count" id="restCount">0人</div>
     </div>
 
 </div>
@@ -234,7 +240,38 @@ body{
     
 </div>
 
-<script>
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  updateDoc,
+  increment
+}
+from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyAKf5vk0DJYwnncP_0B2-Na8lcoWDj4Jqo",
+  authDomain: "yorimichi-c1f5c.firebaseapp.com",
+  projectId: "yorimichi-c1f5c",
+  storageBucket: "yorimichi-c1f5c.firebasestorage.app",
+  messagingSenderId: "93002965036",
+  appId: "1:93002965036:web:5987383321cf8775f8f189"
+    
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const reactionRef =
+  doc(db, "reactions", "today");
+    
 
 const today = new Date();
 
