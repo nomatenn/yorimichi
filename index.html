@@ -287,10 +287,10 @@ fetch("missions.csv")
             ];
 
         document.getElementById("mission")
-            .textContent = mission.title;
+            .innerHTML = mission.title;
 
         document.getElementById("missionComment")
-            .textContent = mission.comment;
+            .innerHTML = mission.comment;
 
     })
     .catch(error => {
