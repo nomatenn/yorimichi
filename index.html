@@ -167,6 +167,13 @@ body{
     opacity:0.5;
     cursor:default;
 }
+
+.rate{
+    text-align:center;
+    margin-top:18px;
+    color:#7a8a6a;
+    font-size:0.95rem;
+}
     
 .footer-message{
     text-align:center;
@@ -242,6 +249,10 @@ body{
 
 </div>
 
+<div id="rate" class="rate">
+    達成率 0%
+</div>
+    
 <div class="footer-message">
     終わったら、それで十分。
 </div>
@@ -259,7 +270,8 @@ import {
   getDoc,
   setDoc,
   updateDoc,
-  increment
+  increment,
+  onSnapshot
 }
 from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
@@ -290,37 +302,59 @@ const todayKey =
 const reactionRef =
   doc(db, "reactions", todayKey);
 
-async function loadCounts() {
+onSnapshot(
+    reactionRef,
+    async (snap) => {
 
-    const snap =
-        await getDoc(reactionRef);
+        if (!snap.exists()) {
 
-    if (!snap.exists()) {
+            await setDoc(
+                reactionRef,
+                {
+                    tryCount: 0,
+                    doneCount: 0
+                }
+            );
 
-        await setDoc(
-            reactionRef,
-            {
-                tryCount: 0,
-                doneCount: 0
-            }
-        );
+            return;
+        }
 
-        loadCounts();
-        return;
+        const data = snap.data();
+
+        const tryCount =
+            data.tryCount || 0;
+
+        const doneCount =
+            data.doneCount || 0;
+
+        document
+            .getElementById("tryCount")
+            .textContent =
+            `${tryCount}人`;
+
+        document
+            .getElementById("doneCount")
+            .textContent =
+            `${doneCount}人`;
+
+        const rate =
+            tryCount === 0
+            ? 0
+            : Math.round(
+                doneCount
+                /
+                tryCount
+                * 100
+            );
+
+        document
+            .getElementById("rate")
+            .textContent =
+            `達成率 ${rate}%`;
+
     }
-
-    const data = snap.data();
-
-    document.getElementById("tryCount")
-    .textContent =
-    `${data.tryCount || 0}人`;
+);
     
-    document.getElementById("doneCount")
-    .textContent =
-    `${data.doneCount || 0}人`;}
-
-loadCounts();
-
 const todayStorageKey =
     `yorimichi-${todayKey}`;
 
