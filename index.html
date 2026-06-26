@@ -489,22 +489,47 @@ fetch("missions.csv")
                 return {
                     id: cols[0],
                     title: cols[1],
-                    comment: cols[2]
+                    comment: cols[2],
+                    season: cols[3]
                 };
 
             });
 
-        const dayNumber =
-            Math.floor(
-                today.getTime()
-                /
-                (1000 * 60 * 60 * 24)
-            );
+        const month = today.getMonth() + 1;
+        
+        let season;
+        
+        if(month >= 3 && month <= 5){
+            season = "spring";
+        }
+        else if(month >= 6 && month <= 9){
+            season = "summer";
+        }
+        else if(month >= 10 && month <= 11){
+            season = "autumn";
+        }
+        else{
+            season = "winter";
+        }
 
-        const mission =
-            missions[
-                dayNumber % missions.length
-            ];
+const seasonalMissions =
+    missions.filter(m =>
+        m.season === "all" ||
+        m.season === season
+    );
+
+const dayNumber =
+    Math.floor(
+        today.getTime()
+        /
+        (1000 * 60 * 60 * 24)
+    );
+
+const mission =
+    seasonalMissions[
+        dayNumber %
+        seasonalMissions.length
+    ];
 
         document.getElementById("mission")
             .innerHTML = mission.title;
